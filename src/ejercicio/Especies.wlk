@@ -7,7 +7,8 @@ class Especie {
 
 	// variables y metodos que necesito para cosas relacionadas a wollok game
 	const sprite = new AnimatedSprite(name = { self.nombre() + "/" }, quantityOfFrames = { self.quantityOfFrames() })
-
+	method evolucion() = ninguna
+	
 	method grito() = "gritos/" + self.nombre() + ".ogg"
 
 	method animacionHabilidad() = new Image(imagePath = "empty.png")
@@ -23,8 +24,14 @@ class Especie {
 	method nombre()
 
 	// metodos del dominio
+	method tieneEvolucion() = self.evolucion() != ninguna
+	
 	method evolucionar(pokemon) {
-		self.error("No tiene evolución")
+		if(self.tieneEvolucion()) {
+			pokemon.especie(self.evolucion())
+		} else {
+			self.error("No tiene evolución")
+		}
 	}
 
 	method usarHabilidad(pokemon)
@@ -38,6 +45,7 @@ class Especie {
 }
 
 class Charmander inherits Especie {
+	override method evolucion() = new Charmeleon()
 
 	override method nombre() = "charmander"
 
@@ -52,13 +60,10 @@ class Charmander inherits Especie {
 
 	override method alegria() = estadio.sensacionTermica()
 
-	override method evolucionar(pokemon) {
-		pokemon.especie(new Charmeleon())
-	}
-
 }
 
 class Squirtle inherits Especie {
+	override method evolucion() = new Wartortle()
 
 	override method nombre() = "squirtle"
 
@@ -71,17 +76,15 @@ class Squirtle inherits Especie {
 
 	override method alegria() = if (estadio.lloviendo()) 7 else 3
 
-	override method evolucionar(pokemon) {
-		pokemon.especie(new Wartortle())
-	}
-
 	override method image() = sprite.image()
 
 }
 
 class Bulbasaur inherits Especie {
 
-	var obtuvoEnergiaDelSol = 0
+	var vecesQueObtuvoEnergiaDelSol = 0
+	
+	override method evolucion() = new Ivysaur()
 
 	override method nombre() = "bulbasaur"
 
@@ -97,14 +100,10 @@ class Bulbasaur inherits Especie {
 
 	method absorberEnergiaDelSol(pokemon, cantidadDeEnergia) {
 		pokemon.disminuirHambre(cantidadDeEnergia)
-		obtuvoEnergiaDelSol += 1
+		vecesQueObtuvoEnergiaDelSol += 1
 	}
 
-	override method alegria() = obtuvoEnergiaDelSol * 3
-
-	override method evolucionar(pokemon) {
-		pokemon.especie(new Ivysaur())
-	}
+	override method alegria() = vecesQueObtuvoEnergiaDelSol * 3
 
 }
 
@@ -165,6 +164,8 @@ class Ivysaur inherits Especie {
 	}
 
 }
+
+object ninguna {}
 
 /*TODO: implementar a jigglypuff */
 //nombre de jigglypuff: "jigglypuff"

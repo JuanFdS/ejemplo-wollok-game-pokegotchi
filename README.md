@@ -1,8 +1,9 @@
 # Clase herencia vs. composición
 
-El código en este repo es una posible solución del ejercicio.
+El código en este repo es una posible solución del siguiente ejercicio:
+https://docs.google.com/document/d/1F41uHf4NQ1FIxCszKzTkWjIrhqC-8jzSXe8rRps-QFE/edit?usp=sharing
 
-## Desafío del cafe con leche
+## Desafío
 
 Queremos agregar un nuevo pokémon, jigglypuff, que se comporta de la siguiente manera:
 

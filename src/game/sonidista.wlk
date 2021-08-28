@@ -2,7 +2,7 @@ import wollok.game.*
 
 object sonidista {
 	method tocar(sonido) {
-		game.sound(sonido)
+		game.sound(sonido).play()
 	}
 	method loop(sonido, segundos) {
 		self.tocar(sonido)
